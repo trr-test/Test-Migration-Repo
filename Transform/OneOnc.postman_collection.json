@@ -1,0 +1,335 @@
+{
+	"info": {
+		"_postman_id": "d3ddde93-5cdf-4f83-b9d6-b3c22fbfd8e6",
+		"name": "OneOnc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Transform list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwOGI2OTExMGM3NTAxNjk1OGMwNDFmMDA3N2MiLCJ1c2VyX25hbWUiOiJNcmlkdWwuVXRrYXJzaEB1cy5ndC5jb20iLCJzdHJvbmdfYXV0aCI6dHJ1ZSwiYXV0aG9yaXRpZXMiOlsiT1JHX0FETUlOIl0sImNsaWVudF9pZCI6IjZmNlVqWlVvMUlhR2tjWjgiLCJzdHJvbmdfYXV0aF9zdXBwb3J0ZWQiOnRydWUsInVzZXJfaWQiOiIyMTU3NjEyIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTU2MjgzNjg3MywianRpIjoiNzFkNzZhODktMDE2My00ZTcwLWI2OGYtYzBiN2M1MTNiNzJhIn0.POdAdvg89QCwAZjNxu-RiE-__H8vvGTm8Is5HSdvd-4"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://oneonc-sb.identitynow.com/api/transform/list",
+					"protocol": "https",
+					"host": [
+						"oneonc-sb",
+						"identitynow",
+						"com"
+					],
+					"path": [
+						"api",
+						"transform",
+						"list"
+					]
+				},
+				"description": "SB of OneOnc"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Attr sync",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwOGI2OTExMGM3NTAxNjk1OGMwNDFmMDA3N2MiLCJ1c2VyX25hbWUiOiJNcmlkdWwuVXRrYXJzaEB1cy5ndC5jb20iLCJzdHJvbmdfYXV0aCI6dHJ1ZSwiYXV0aG9yaXRpZXMiOlsiT1JHX0FETUlOIl0sImNsaWVudF9pZCI6IjZmNlVqWlVvMUlhR2tjWjgiLCJzdHJvbmdfYXV0aF9zdXBwb3J0ZWQiOnRydWUsInVzZXJfaWQiOiIyMTU3NjEyIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTU2MjgzNjg3MywianRpIjoiNzFkNzZhODktMDE2My00ZTcwLWI2OGYtYzBiN2M1MTNiNzJhIn0.POdAdvg89QCwAZjNxu-RiE-__H8vvGTm8Is5HSdvd-4"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://oneonc-sb.identitynow.com/api/transform/list",
+					"protocol": "https",
+					"host": [
+						"oneonc-sb",
+						"identitynow",
+						"com"
+					],
+					"path": [
+						"api",
+						"transform",
+						"list"
+					]
+				},
+				"description": "SB of OneOnc"
+			},
+			"response": []
+		},
+		{
+			"name": "Set Attr sync Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwOGI2OTExMGM3NTAxNjk1OGMwNDFmMDA3N2MiLCJ1c2VyX25hbWUiOiJNcmlkdWwuVXRrYXJzaEB1cy5ndC5jb20iLCJzdHJvbmdfYXV0aCI6dHJ1ZSwiYXV0aG9yaXRpZXMiOlsiT1JHX0FETUlOIl0sImNsaWVudF9pZCI6IjZmNlVqWlVvMUlhR2tjWjgiLCJzdHJvbmdfYXV0aF9zdXBwb3J0ZWQiOnRydWUsInVzZXJfaWQiOiIyMTU3NjEyIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTU2MjgzNjg3MywianRpIjoiNzFkNzZhODktMDE2My00ZTcwLWI2OGYtYzBiN2M1MTNiNzJhIn0.POdAdvg89QCwAZjNxu-RiE-__H8vvGTm8Is5HSdvd-4"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://oneonc-sb.identitynow.com/api/source/setAttributeSyncConfig/93327",
+					"protocol": "https",
+					"host": [
+						"oneonc-sb",
+						"identitynow",
+						"com"
+					],
+					"path": [
+						"api",
+						"source",
+						"setAttributeSyncConfig",
+						"93327"
+					]
+				},
+				"description": "SB of OneOnc"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Source details- SB",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwOGI2OTExMGM3NTAxNjk1OGMwNDFmMDA3N2MiLCJ1c2VyX25hbWUiOiJNcmlkdWwuVXRrYXJzaEB1cy5ndC5jb20iLCJzdHJvbmdfYXV0aCI6dHJ1ZSwiYXV0aG9yaXRpZXMiOlsiT1JHX0FETUlOIl0sImNsaWVudF9pZCI6IjZmNlVqWlVvMUlhR2tjWjgiLCJzdHJvbmdfYXV0aF9zdXBwb3J0ZWQiOnRydWUsInVzZXJfaWQiOiIyMTU3NjEyIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTU2MDMyNTM3MywianRpIjoiNDljOTgwNWMtYzU3MC00NzBlLWI5ZTgtYjg3MDU3MDI1YzIxIn0.e5Q2VLZl4IecTPywnyaxZOEUwHilQTId7f49bDKFLKU"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/cc/api/source/get/93327",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cc",
+						"api",
+						"source",
+						"get",
+						"93327"
+					]
+				},
+				"description": "SB of OneOnc"
+			},
+			"response": []
+		},
+		{
+			"name": "PROD DNT-PROD",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwODM2ODcxNDkwNDAxNjg3ZWZlMTBmMjdiNzgiLCJ1c2VyX25hbWUiOiJBcmNoYW5hIEdlZGRhbSIsInN0cm9uZ19hdXRoIjp0cnVlLCJhdXRob3JpdGllcyI6WyJPUkdfQURNSU4iLCJEQVNIQk9BUkQiXSwiY2xpZW50X2lkIjoiNmY2VWpaVW8xSWFHa2NaOCIsInN0cm9uZ19hdXRoX3N1cHBvcnRlZCI6dHJ1ZSwidXNlcl9pZCI6IjIwMzA5NzQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTU3OTk5NTM2LCJqdGkiOiJiODQ0YjE2OC1lZjNlLTQ1NWEtODdjYi0xNmEyYzRkMDFiZWUifQ.s-qVRYWmqUYAvMgrAZFugd_YPuznNLbXNCqMnf_1Sss"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/transform/list",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transform",
+						"list"
+					]
+				},
+				"description": "SB of OneOnc"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rules IdNow",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwODM2ODcxNDkwNDAxNjg3ZWZlMTBmMjdiNzgiLCJ1c2VyX25hbWUiOiJBcmNoYW5hIEdlZGRhbSIsInN0cm9uZ19hdXRoIjp0cnVlLCJhdXRob3JpdGllcyI6WyJPUkdfQURNSU4iLCJEQVNIQk9BUkQiXSwiY2xpZW50X2lkIjoiNmY2VWpaVW8xSWFHa2NaOCIsInN0cm9uZ19hdXRoX3N1cHBvcnRlZCI6dHJ1ZSwidXNlcl9pZCI6IjIwMzA5NzQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTU3OTk5NTM2LCJqdGkiOiJiODQ0YjE2OC1lZjNlLTQ1NWEtODdjYi0xNmEyYzRkMDFiZWUifQ.s-qVRYWmqUYAvMgrAZFugd_YPuznNLbXNCqMnf_1Sss"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/transform/list",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"transform",
+						"list"
+					]
+				},
+				"description": "SB of OneOnc"
+			},
+			"response": []
+		},
+		{
+			"name": "Update transform",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwODM2ODcxNDkwNDAxNjg3ZWZlMTBmMjdiNzgiLCJ1c2VyX25hbWUiOiJBcmNoYW5hIEdlZGRhbSIsInN0cm9uZ19hdXRoIjp0cnVlLCJhdXRob3JpdGllcyI6WyJPUkdfQURNSU4iLCJEQVNIQk9BUkQiXSwiY2xpZW50X2lkIjoiNmY2VWpaVW8xSWFHa2NaOCIsInN0cm9uZ19hdXRoX3N1cHBvcnRlZCI6dHJ1ZSwidXNlcl9pZCI6IjIwMzA5NzQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTU3OTk5NTM2LCJqdGkiOiJiODQ0YjE2OC1lZjNlLTQ1NWEtODdjYi0xNmEyYzRkMDFiZWUifQ.s-qVRYWmqUYAvMgrAZFugd_YPuznNLbXNCqMnf_1Sss"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n            \"attributes\": {\r\n                \"begin\": 0,\r\n                \"end\": 2\r\n            },\r\n            \"id\": \"Get Company From Code\",\r\n            \"type\": \"substring\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/cc/api/transform/update/Get Company From Code",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cc",
+						"api",
+						"transform",
+						"update",
+						"Get Company From Code"
+					]
+				},
+				"description": "SB of OneOnc"
+			},
+			"response": []
+		},
+		{
+			"name": "Create transform",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwODM2ODcxNDkwNDAxNjg3ZWZlMTBmMjdiNzgiLCJ1c2VyX25hbWUiOiJBcmNoYW5hIEdlZGRhbSIsInN0cm9uZ19hdXRoIjp0cnVlLCJhdXRob3JpdGllcyI6WyJPUkdfQURNSU4iLCJEQVNIQk9BUkQiXSwiY2xpZW50X2lkIjoiNmY2VWpaVW8xSWFHa2NaOCIsInN0cm9uZ19hdXRoX3N1cHBvcnRlZCI6dHJ1ZSwidXNlcl9pZCI6IjIwMzA5NzQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTU3OTk5NTM2LCJqdGkiOiJiODQ0YjE2OC1lZjNlLTQ1NWEtODdjYi0xNmEyYzRkMDFiZWUifQ.s-qVRYWmqUYAvMgrAZFugd_YPuznNLbXNCqMnf_1Sss"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n            \"attributes\": {\r\n                \"begin\": 0,\r\n                \"end\": 2\r\n            },\r\n            \"id\": \"Get Company From Code\",\r\n            \"type\": \"substring\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/cc/api/transform/update/Get Company From Code",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cc",
+						"api",
+						"transform",
+						"update",
+						"Get Company From Code"
+					]
+				},
+				"description": "SB of OneOnc"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Account Profiles of source",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Account Profiles of source copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://oneonc-sb.identitynow.com/api/source/export/93327",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwODM2ODcxNDkwNDAxNjg3ZWZlMTBmMjdiNzgiLCJ1c2VyX25hbWUiOiJBcmNoYW5hIEdlZGRhbSIsInN0cm9uZ19hdXRoIjp0cnVlLCJhdXRob3JpdGllcyI6WyJPUkdfQURNSU4iLCJEQVNIQk9BUkQiXSwiY2xpZW50X2lkIjoiNmY2VWpaVW8xSWFHa2NaOCIsInN0cm9uZ19hdXRoX3N1cHBvcnRlZCI6dHJ1ZSwidXNlcl9pZCI6IjIwMzA5NzQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTU2NjE4NDI0LCJqdGkiOiI3YWU2YWQyZC03MmRlLTRkNDctYjI4YS1iMzU0ZTQ4Njk2YzUifQ.L2tNvJ07RRLyIkYw-h6ylzKAbO1Z6RLQtjrHpanrXYk"
+					}
+				],
+				"url": {
+					"raw": "https://oneonc-sb.identitynow.com/api/source/export/93327",
+					"protocol": "https",
+					"host": [
+						"oneonc-sb",
+						"identitynow",
+						"com"
+					],
+					"path": [
+						"api",
+						"source",
+						"export",
+						"93327"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://oneonc-sb.identitynow.com/v2/identities/2184302",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOiIwYmE4ZDRiMS02NGZiLTRmMjUtODFlZC04ODA1NTM4MWI0MzIiLCJpbnRlcm5hbCI6dHJ1ZSwicG9kIjoic3RnMDEtdXNlYXN0MSIsIm9yZyI6Im9uZW9uYy1zYiIsImlkZW50aXR5X2lkIjoiMmM5MTgwODM2ODcxNDkwNDAxNjg3ZWZlMTBmMjdiNzgiLCJ1c2VyX25hbWUiOiJBcmNoYW5hIEdlZGRhbSIsInN0cm9uZ19hdXRoIjp0cnVlLCJhdXRob3JpdGllcyI6WyJPUkdfQURNSU4iLCJEQVNIQk9BUkQiXSwiY2xpZW50X2lkIjoiNmY2VWpaVW8xSWFHa2NaOCIsInN0cm9uZ19hdXRoX3N1cHBvcnRlZCI6dHJ1ZSwidXNlcl9pZCI6IjIwMzA5NzQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTU2NjE4NDI0LCJqdGkiOiI3YWU2YWQyZC03MmRlLTRkNDctYjI4YS1iMzU0ZTQ4Njk2YzUifQ.L2tNvJ07RRLyIkYw-h6ylzKAbO1Z6RLQtjrHpanrXYk"
+					}
+				],
+				"url": {
+					"raw": "https://oneonc-sb.identitynow.com/v2/identities/2184302",
+					"protocol": "https",
+					"host": [
+						"oneonc-sb",
+						"identitynow",
+						"com"
+					],
+					"path": [
+						"v2",
+						"identities",
+						"2184302"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

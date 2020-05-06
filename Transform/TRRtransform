@@ -1,0 +1,1307 @@
+{
+    "count": 43,
+    "items": [
+        {
+            "attributes": null,
+            "id": "ToUpper",
+            "type": "upper"
+        },
+        {
+            "attributes": null,
+            "id": "ISO3166 Country Format",
+            "type": "iso3166"
+        },
+        {
+            "attributes": null,
+            "id": "Remove Diacritical Marks",
+            "type": "decomposeDiacriticalMarks"
+        },
+        {
+            "attributes": null,
+            "id": "E.164 Phone Format",
+            "type": "e164phone"
+        },
+        {
+            "attributes": null,
+            "id": "ToLower",
+            "type": "lower"
+        },
+        {
+            "attributes": {
+                "ignoreErrors": true,
+                "values": [
+                    {
+                        "attributes": {
+                            "ACTIVE": {
+                                "attributes": {
+                                    "ACTIVE": {
+                                        "attributes": {
+                                            "attributeName": "ACTIVE",
+                                            "sourceName": "Workday"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    "value": "#if($ACTIVE.equals('1'))active#end"
+                                },
+                                "type": "static"
+                            },
+                            "value": "$ACTIVE.trim()"
+                        },
+                        "type": "static"
+                    },
+                    {
+                        "attributes": {
+                            "RETIRED": {
+                                "attributes": {
+                                    "RETIRED": {
+                                        "attributes": {
+                                            "attributeName": "RETIRED",
+                                            "sourceName": "Workday"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    "value": "#if($RETIRED.equals('1'))loa#end"
+                                },
+                                "type": "static"
+                            },
+                            "value": "$RETIRED.trim()"
+                        },
+                        "type": "static"
+                    },
+                    {
+                        "attributes": {
+                            "TERMINATED": {
+                                "attributes": {
+                                    "TERMINATED": {
+                                        "attributes": {
+                                            "attributeName": "TERMINATED",
+                                            "sourceName": "Workday"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    "value": "#if($TERMINATED.equals('1'))inactive#end"
+                                },
+                                "type": "static"
+                            },
+                            "value": "$TERMINATED.trim()"
+                        },
+                        "type": "static"
+                    },
+                    {
+                        "attributes": {
+                            "REHIRE": {
+                                "attributes": {
+                                    "REHIRE": {
+                                        "attributes": {
+                                            "attributeName": "REHIRE",
+                                            "sourceName": "Workday"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    "value": "#if($REHIRE.equals('1'))active #else--#end"
+                                },
+                                "type": "static"
+                            },
+                            "value": "$REHIRE.trim()"
+                        },
+                        "type": "static"
+                    },
+                    ""
+                ]
+            },
+            "id": "Determine User Status - Workday",
+            "type": "firstValid"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "name": "workPhone"
+                                },
+                                "type": "identityAttribute"
+                            },
+                            "-"
+                        ]
+                    },
+                    "type": "concat"
+                },
+                "table": {
+                    "-": "",
+                    "default": {
+                        "attributes": {
+                            "values": [
+                                "{\"type\":\"work\",\"value\":\"",
+                                {
+                                    "attributes": {
+                                        "name": "workPhone"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                "\"}"
+                            ]
+                        },
+                        "type": "concat"
+                    }
+                }
+            },
+            "id": "Build G-API Phone String",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "attributes": {
+                            "name": "employeeType"
+                        },
+                        "type": "identityAttribute"
+                    },
+                    "type": "lower"
+                },
+                "table": {
+                    "contractor": "Contractors",
+                    "default": "Employees",
+                    "temp": "Contractors"
+                }
+            },
+            "id": "User Type",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "ignoreErrors": true,
+                "values": [
+                    {
+                        "attributes": {
+                            "value": "$work.substring($work.indexOf(':'),$work.indexOf('}')).substring(1).replace('\"','')",
+                            "work": {
+                                "attributes": {
+                                    "phones": {
+                                        "attributes": {
+                                            "attributeName": "phones",
+                                            "sourceName": "Google Sync"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    "value": "#if($phones.contains('work'))$phones.substring($phones.indexOf('work'))#else--#end"
+                                },
+                                "type": "static"
+                            }
+                        },
+                        "type": "static"
+                    },
+                    ""
+                ]
+            },
+            "id": "_tst_Extract Mobile Number",
+            "type": "firstValid"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "attributeName": "Email",
+                                    "sourceName": "Namely"
+                                },
+                                "type": "accountAttribute"
+                            },
+                            {
+                                "attributes": {
+                                    "attributeName": "Employee ID",
+                                    "sourceName": "Namely"
+                                },
+                                "type": "accountAttribute"
+                            }
+                        ]
+                    },
+                    "type": "firstValid"
+                }
+            },
+            "id": "Common Uid",
+            "type": "lower"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "input": {
+                            "attributes": {
+                                "values": [
+                                    {
+                                        "attributes": {
+                                            "name": "cloudLifecycleState"
+                                        },
+                                        "type": "identityAttribute"
+                                    },
+                                    "-",
+                                    {
+                                        "attributes": {
+                                            "name": "cloudStatus"
+                                        },
+                                        "type": "identityAttribute"
+                                    }
+                                ]
+                            },
+                            "type": "concat"
+                        }
+                    },
+                    "type": "lower"
+                },
+                "table": {
+                    "active-": "licensed",
+                    "active-active": "licensed",
+                    "active-pending": "licensed",
+                    "active-registered": "licensed",
+                    "active-unregistered": "licensed",
+                    "default": "",
+                    "inactive-": "unlicensed",
+                    "inactive-active": "licensed",
+                    "inactive-pending": "unlicensed",
+                    "inactive-registered": "unlicensed",
+                    "inactive-unregistered": "unlicensed"
+                }
+            },
+            "id": "Determine License",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "ignoreErrors": true,
+                "values": [
+                    {
+                        "attributes": {
+                            "mobile": {
+                                "attributes": {
+                                    "phones": {
+                                        "attributes": {
+                                            "attributeName": "phones",
+                                            "sourceName": "Google Sync"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    "value": "#if($phones.contains('mobile'))$phones.substring($phones.indexOf('mobile'))#else--#end"
+                                },
+                                "type": "static"
+                            },
+                            "value": "$mobile.substring($mobile.indexOf(':'),$mobile.indexOf('}')).substring(1).replace('\"','')"
+                        },
+                        "type": "static"
+                    },
+                    ""
+                ]
+            },
+            "id": "Extract Google Mobile Number",
+            "type": "firstValid"
+        },
+        {
+            "attributes": {
+                "ignoreErrors": true,
+                "values": [
+                    {
+                        "attributes": {
+                            "value": "$work.substring($work.indexOf(':',0),$work.indexOf('}',0)).replace(':','').replace('\"','')",
+                            "work": {
+                                "attributes": {
+                                    "begin": {
+                                        "attributes": {
+                                            "input": {
+                                                "attributes": {
+                                                    "attributeName": "phones",
+                                                    "sourceName": "Google Sync"
+                                                },
+                                                "type": "accountAttribute"
+                                            },
+                                            "substring": "\"mobile\""
+                                        },
+                                        "type": "indexOf"
+                                    }
+                                },
+                                "type": "substring"
+                            }
+                        },
+                        "type": "static"
+                    },
+                    ""
+                ]
+            },
+            "id": "Extract Mobile Number",
+            "type": "firstValid"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "name": "startDate"
+                                },
+                                "type": "identityAttribute"
+                            },
+                            "-"
+                        ]
+                    },
+                    "type": "concat"
+                },
+                "table": {
+                    "-": "",
+                    "default": {
+                        "attributes": {
+                            "values": [
+                                "{\"Hired_Date\":\"",
+                                {
+                                    "attributes": {
+                                        "name": "startDate"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                "\"}"
+                            ]
+                        },
+                        "type": "concat"
+                    }
+                }
+            },
+            "id": "Build G-API StartDate String",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "input": {
+                            "attributes": {
+                                "values": [
+                                    {
+                                        "attributes": {
+                                            "attributeName": "Preferred First Name",
+                                            "sourceName": "Namely"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    {
+                                        "attributes": {
+                                            "attributeName": "First Name",
+                                            "sourceName": "Namely"
+                                        },
+                                        "type": "accountAttribute"
+                                    }
+                                ]
+                            },
+                            "type": "firstValid"
+                        }
+                    },
+                    "type": "trim"
+                }
+            },
+            "id": "Determine First Name",
+            "type": "decomposeDiacriticalMarks"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "attributeName": "primaryEmail",
+                                    "sourceName": "Google IdP Ninja"
+                                },
+                                "type": "accountAttribute"
+                            },
+                            {
+                                "attributes": {
+                                    "attributeName": "mail",
+                                    "sourceName": "Active Directory Ninja"
+                                },
+                                "type": "accountAttribute"
+                            },
+                            {
+                                "attributes": {
+                                    "value": "(none)"
+                                },
+                                "type": "static"
+                            }
+                        ]
+                    },
+                    "type": "firstValid"
+                }
+            },
+            "id": "Determine Email",
+            "type": "lower"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "name": "identificationNumber"
+                                },
+                                "type": "identityAttribute"
+                            },
+                            "-"
+                        ]
+                    },
+                    "type": "concat"
+                },
+                "table": {
+                    "-": "",
+                    "default": {
+                        "attributes": {
+                            "values": [
+                                "{\"type\":\"organization\",\"value\":\"",
+                                {
+                                    "attributes": {
+                                        "name": "identificationNumber"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                "\"}"
+                            ]
+                        },
+                        "type": "concat"
+                    }
+                }
+            },
+            "id": "Build G-API ExternalID String",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "department": {
+                    "attributes": {
+                        "begin": {
+                            "attributes": {
+                                "substring": "-"
+                            },
+                            "input": {
+                                "type": "trim"
+                            },
+                            "type": "indexOf"
+                        },
+                        "beginOffset": "2",
+                        "end": {
+                            "attributes": {
+                                "substring": ":"
+                            },
+                            "input": {
+                                "type": "trim"
+                            },
+                            "type": "indexOf"
+                        }
+                    },
+                    "type": "substring"
+                },
+                "value": "$department.trim()"
+            },
+            "id": "Generate Department Name",
+            "type": "static"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "attributeName": "Email",
+                                    "sourceName": "Namely"
+                                },
+                                "type": "accountAttribute"
+                            },
+                            {
+                                "attributes": {
+                                    "value": "(none)"
+                                },
+                                "type": "static"
+                            }
+                        ]
+                    },
+                    "type": "firstValid"
+                }
+            },
+            "id": "Common Email",
+            "type": "lower"
+        },
+        {
+            "attributes": {
+                "ignoreErrors": true,
+                "values": [
+                    {
+                        "attributes": {
+                            "value": "$work.substring($work.indexOf(':',0),$work.indexOf('}',0)).replace(':','').replace('\"','')",
+                            "work": {
+                                "attributes": {
+                                    "begin": {
+                                        "attributes": {
+                                            "input": {
+                                                "attributes": {
+                                                    "attributeName": "phones",
+                                                    "sourceName": "Google Sync"
+                                                },
+                                                "type": "accountAttribute"
+                                            },
+                                            "substring": "\"work\""
+                                        },
+                                        "type": "indexOf"
+                                    }
+                                },
+                                "type": "substring"
+                            }
+                        },
+                        "type": "static"
+                    },
+                    ""
+                ]
+            },
+            "id": "Extract Work Number",
+            "type": "firstValid"
+        },
+        {
+            "attributes": {
+                "departmentName": {
+                    "attributes": {
+                        "name": "departmentName"
+                    },
+                    "type": "identityAttribute"
+                },
+                "subDepartment": {
+                    "attributes": {
+                        "name": "subDepartment"
+                    },
+                    "type": "identityAttribute"
+                },
+                "value": "$departmentName_$subDepartment"
+            },
+            "id": "Generate Department OU",
+            "type": "static"
+        },
+        {
+            "attributes": {
+                "values": [
+                    {
+                        "attributes": {
+                            "name": "firstname"
+                        },
+                        "type": "identityAttribute"
+                    },
+                    " ",
+                    {
+                        "attributes": {
+                            "name": "lastname"
+                        },
+                        "type": "identityAttribute"
+                    }
+                ]
+            },
+            "id": "Generate Display Name",
+            "type": "concat"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "attributes": {
+                            "name": "employeeType"
+                        },
+                        "type": "identityAttribute"
+                    },
+                    "type": "lower"
+                },
+                "table": {
+                    "contractor": "Contractors",
+                    "default": "Employees",
+                    "temp": "Contractors"
+                }
+            },
+            "id": "Determine User Type",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "name": "managerEmail"
+                                },
+                                "type": "identityAttribute"
+                            },
+                            "-"
+                        ]
+                    },
+                    "type": "concat"
+                },
+                "table": {
+                    "-": "",
+                    "default": {
+                        "attributes": {
+                            "values": [
+                                "{\"type\":\"manager\",\"value\":\"",
+                                {
+                                    "attributes": {
+                                        "name": "managerEmail"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                "\"}"
+                            ]
+                        },
+                        "type": "concat"
+                    }
+                }
+            },
+            "id": "Build G-API relations String",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "begin": "0",
+                "end": {
+                    "attributes": {
+                        "substring": " - "
+                    },
+                    "type": "indexOf"
+                }
+            },
+            "id": "Generate Department Code",
+            "type": "substring"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "name": "cloudLifecycleState"
+                    },
+                    "type": "identityAttribute"
+                },
+                "table": {
+                    "default": {
+                        "attributes": {
+                            "values": [
+                                {
+                                    "attributes": {
+                                        "departmentName": {
+                                            "attributes": {
+                                                "name": "departmentName"
+                                            },
+                                            "type": "identityAttribute"
+                                        },
+                                        "locationOu": {
+                                            "attributes": {
+                                                "name": "locationOu"
+                                            },
+                                            "type": "identityAttribute"
+                                        },
+                                        "userType": {
+                                            "attributes": {
+                                                "name": "userType"
+                                            },
+                                            "type": "identityAttribute"
+                                        },
+                                        "value": "/TRR_Users/$userType/$locationOu/$departmentName"
+                                    },
+                                    "type": "static"
+                                },
+                                "_",
+                                {
+                                    "attributes": {
+                                        "subDepartment": {
+                                            "attributes": {
+                                                "name": "subDepartment"
+                                            },
+                                            "type": "identityAttribute"
+                                        },
+                                        "value": "$subDepartment"
+                                    },
+                                    "type": "static"
+                                }
+                            ]
+                        },
+                        "type": "concat"
+                    },
+                    "inactive": {
+                        "attributes": {
+                            "input": {
+                                "attributes": {
+                                    "name": "jobTier"
+                                },
+                                "type": "identityAttribute"
+                            },
+                            "table": {
+                                "Associate Director": "/ODTL",
+                                "Director": "/ODTL",
+                                "Executive": "/ODTL",
+                                "Senior Director": "/ODTL",
+                                "default": "/TRR_Terminated"
+                            }
+                        },
+                        "type": "lookup"
+                    }
+                }
+            },
+            "id": "Generate OrgUnitPath",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "table": {
+                    "Brisbane": "Brisbane",
+                    "Chicago": "Chicago",
+                    "Dallas": "Dallas",
+                    "Field": "Field",
+                    "Field- New York": "Field",
+                    "Field-Brazil": "Field",
+                    "Field-Canada": "Field",
+                    "Field-Chicago": "Field",
+                    "Field-India": "Field",
+                    "Field-Los Angeles": "Field",
+                    "Field-Monterey": "Field",
+                    "Field-Philippines": "Field",
+                    "Field-Uruguay": "Field",
+                    "Headquarters": "Headquarters",
+                    "Las Vegas": "Las Vegas",
+                    "Los Angeles - WeHo - LCO": "Los Angeles-WeHo",
+                    "Los Angeles - WeHo - Store": "Los Angeles-WeHo",
+                    "Los Angeles LCO": "Los Angeles LCO",
+                    "Miami": "Miami",
+                    "NY Greene St": "NY Greene St",
+                    "NY Madison UES Store": "NY Madison UES Store",
+                    "NYC - SoHo - LCO": "NYC-SoHo",
+                    "NYC - SoHo - Store": "NYC-SoHo",
+                    "New York City-29 LCO": "New York City-29",
+                    "New York City-29 Sales": "New York City-29",
+                    "New York City-53": "New York City-53",
+                    "Perth Amboy": "Perth Amboy",
+                    "San Francisco - LCO": "Headquarters",
+                    "Secaucus": "Secaucus",
+                    "Washington, DC": "Washington DC",
+                    "default": "Headquarters"
+                }
+            },
+            "id": "Generate Location OU",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "name": "location"
+                                },
+                                "type": "identityAttribute"
+                            },
+                            "-"
+                        ]
+                    },
+                    "type": "concat"
+                },
+                "table": {
+                    "-": "",
+                    "default": {
+                        "attributes": {
+                            "values": [
+                                "{\"type\":\"work\",\"primary\":\"true\",\"formatted\":\"",
+                                {
+                                    "attributes": {
+                                        "name": "location"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                "\"}"
+                            ]
+                        },
+                        "type": "concat"
+                    }
+                }
+            },
+            "id": "Build G-API Address String",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "ignoreErrors": true,
+                "values": [
+                    {
+                        "attributes": {
+                            "middleName": {
+                                "attributes": {
+                                    "begin": "0",
+                                    "end": {
+                                        "attributes": {
+                                            "substring": "@"
+                                        },
+                                        "input": {
+                                            "type": "trim"
+                                        },
+                                        "type": "indexOf"
+                                    }
+                                },
+                                "type": "substring"
+                            },
+                            "value": "$middleName.trim()"
+                        },
+                        "type": "static"
+                    },
+                    {
+                        "attributes": {
+                            "values": [
+                                {
+                                    "attributes": {
+                                        "name": "firstname"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                ".",
+                                {
+                                    "attributes": {
+                                        "name": "lastname"
+                                    },
+                                    "type": "identityAttribute"
+                                }
+                            ]
+                        },
+                        "type": "concat"
+                    }
+                ]
+            },
+            "id": "Generate sAMAccountName",
+            "type": "firstValid"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "values": [
+                            {
+                                "attributes": {
+                                    "name": "jobTitle"
+                                },
+                                "type": "identityAttribute"
+                            },
+                            "-"
+                        ]
+                    },
+                    "type": "concat"
+                },
+                "table": {
+                    "-": "",
+                    "default": {
+                        "attributes": {
+                            "values": [
+                                "{\"customType\":\"work\",\"department\":\"",
+                                {
+                                    "attributes": {
+                                        "name": "department"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                "\",\"name\":\"The RealReal\",\"primary\":\"true\",\"title\":\"",
+                                {
+                                    "attributes": {
+                                        "name": "jobTitle"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                "\"}"
+                            ]
+                        },
+                        "type": "concat"
+                    }
+                }
+            },
+            "id": "Build G-API Organizations String",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "name": "cloudLifecycleState"
+                    },
+                    "type": "identityAttribute"
+                },
+                "table": {
+                    "default": {
+                        "attributes": {
+                            "values": [
+                                "OU=",
+                                {
+                                    "attributes": {
+                                        "name": "departmentName"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                "_",
+                                {
+                                    "attributes": {
+                                        "name": "subDepartment"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                ",OU=",
+                                {
+                                    "attributes": {
+                                        "name": "locationOu"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                ",OU=",
+                                {
+                                    "attributes": {
+                                        "name": "userType"
+                                    },
+                                    "type": "identityAttribute"
+                                },
+                                ",OU=TRR_Users,DC=trr,DC=ninja"
+                            ]
+                        },
+                        "type": "concat"
+                    },
+                    "inactive": "OU=TRR_Terminated,DC=trr,DC=ninja"
+                }
+            },
+            "id": "Generate AD OU",
+            "type": "lookup"
+        },
+        {
+            "attributes": {
+                "department": {
+                    "attributes": {
+                        "begin": {
+                            "attributes": {
+                                "substring": " : "
+                            },
+                            "input": {
+                                "type": "trim"
+                            },
+                            "type": "indexOf"
+                        },
+                        "beginOffset": "2",
+                        "end": "-1"
+                    },
+                    "type": "substring"
+                },
+                "value": "$department.trim()"
+            },
+            "id": "Generate Sub Department",
+            "type": "static"
+        },
+        {
+            "attributes": {
+                "ignoreErrors": true,
+                "values": [
+                    {
+                        "attributes": {
+                            "value": "$work.substring($work.indexOf(':'),$work.indexOf('}')).substring(1).replace('\"','')",
+                            "work": {
+                                "attributes": {
+                                    "phones": {
+                                        "attributes": {
+                                            "attributeName": "phones",
+                                            "sourceName": "Google Sync"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    "value": "#if($phones.contains('work'))$phones.substring($phones.indexOf('work'))#else--#end"
+                                },
+                                "type": "static"
+                            }
+                        },
+                        "type": "static"
+                    },
+                    ""
+                ]
+            },
+            "id": "Extract Google Work Number",
+            "type": "firstValid"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "attributes": {
+                            "input": {
+                                "attributes": {
+                                    "values": [
+                                        {
+                                            "attributes": {
+                                                "attributeName": "Preferred First Name",
+                                                "sourceName": "Namely"
+                                            },
+                                            "type": "accountAttribute"
+                                        },
+                                        {
+                                            "attributes": {
+                                                "attributeName": "First Name",
+                                                "sourceName": "Namely"
+                                            },
+                                            "type": "accountAttribute"
+                                        }
+                                    ]
+                                },
+                                "type": "firstValid"
+                            }
+                        },
+                        "input": {
+                            "attributes": {
+                                "regex": "\\s",
+                                "replacement": ""
+                            },
+                            "type": "replace"
+                        }
+                    },
+                    "type": "trim"
+                }
+            },
+            "id": "Determine First Name New2",
+            "type": "decomposeDiacriticalMarks"
+        },
+        {
+            "attributes": {
+                "email": {
+                    "attributes": {
+                        "begin": "0",
+                        "end": {
+                            "attributes": {
+                                "substring": "@"
+                            },
+                            "type": "indexOf"
+                        }
+                    }
+                }
+            },
+            "id": "Generate Community Nick Name",
+            "type": "substring"
+        },
+        {
+            "attributes": {
+                "department": {
+                    "attributes": {
+                        "begin": {
+                            "attributes": {
+                                "substring": ": "
+                            },
+                            "input": {
+                                "type": "trim"
+                            },
+                            "type": "indexOf"
+                        },
+                        "beginOffset": "1",
+                        "end": "-1"
+                    },
+                    "type": "substring"
+                },
+                "value": "$department.trim()"
+            },
+            "id": "Generate Sub Department - Workday",
+            "type": "static"
+        },
+        {
+            "attributes": {
+                "begin": "0",
+                "end": {
+                    "attributes": {
+                        "substring": " "
+                    },
+                    "type": "indexOf"
+                }
+            },
+            "id": "Generate Department Code - Workday",
+            "type": "substring"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "attributes": {
+                            "input": {
+                                "attributes": {
+                                    "values": [
+                                        {
+                                            "attributes": {
+                                                "attributeName": "Preferred First Name",
+                                                "sourceName": "Namely"
+                                            },
+                                            "type": "accountAttribute"
+                                        },
+                                        {
+                                            "attributes": {
+                                                "attributeName": "First Name",
+                                                "sourceName": "Namely"
+                                            },
+                                            "type": "accountAttribute"
+                                        }
+                                    ]
+                                },
+                                "type": "firstValid"
+                            }
+                        },
+                        "input": {
+                            "attributes": {
+                                "regex": "\\W|_",
+                                "replacement": ""
+                            },
+                            "type": "replace"
+                        }
+                    },
+                    "type": "trim"
+                }
+            },
+            "id": "Determine First Name New",
+            "type": "decomposeDiacriticalMarks"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "table": {
+                            "11747e43-da50-44f4-b965-2dac1cf3e6ec": "Professional",
+                            "1add0ad5-749d-4051-be60-67ef424b69a6": "Senior Manager",
+                            "39265af9-e0fb-4ab2-814b-d6f2bea98be9": "Director",
+                            "5373fdd6-f30c-4609-a7a5-d855ab7ea8e3": "Manager",
+                            "559381bc-2ead-4e86-962c-c36664c13cfe": "Unknown Job Tier",
+                            "63dad327-65c0-4d20-bf32-2258a50bf47c": "Executive",
+                            "8ef577d8-8731-4e63-88fe-4ec4e2bd5fcd": "Supervisor",
+                            "92c8451e-2702-4077-8b51-c162994f22f7": "Visual Merchandiser",
+                            "933567c7-eee7-4723-8fa9-f5ad1d4f326c": "Associate Director",
+                            "9a7c61ab-d61d-4546-b047-3825e6220ab8": "Senior Director",
+                            "bc5d0a30-e024-4b4d-89f4-9488808a0ad0": "Consultant",
+                            "bd9b12c3-0020-48ea-81b5-8d03b5c2531c": "Quota - Support level",
+                            "c0b71cb1-fe57-4031-bba7-427283c67cc4": "Lead - Support level",
+                            "cf15b743-2d34-43a2-a45e-7465ddb3cfd2": "Management",
+                            "default": "Support",
+                            "f24c4c71-78fd-407b-92f1-51e6dd596aa8": "Assistant Manager",
+                            "f2b724d9-57b9-40a1-a613-d2ba0eaaf780": "Support"
+                        }
+                    },
+                    "type": "lookup"
+                }
+            },
+            "id": "Determine Job Tier Name",
+            "type": "trim"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "input": {
+                            "attributes": {
+                                "values": [
+                                    {
+                                        "attributes": {
+                                            "attributeName": "Preferred Last Name",
+                                            "sourceName": "Namely"
+                                        },
+                                        "type": "accountAttribute"
+                                    },
+                                    {
+                                        "attributes": {
+                                            "attributeName": "Last Name",
+                                            "sourceName": "Namely"
+                                        },
+                                        "type": "accountAttribute"
+                                    }
+                                ]
+                            },
+                            "type": "firstValid"
+                        }
+                    },
+                    "type": "trim"
+                }
+            },
+            "id": "Determine Last Name",
+            "type": "decomposeDiacriticalMarks"
+        },
+        {
+            "attributes": {
+                "value": "false"
+            },
+            "id": "Init Set Emergency Terminated",
+            "type": "static"
+        },
+        {
+            "attributes": {
+                "input": {
+                    "attributes": {
+                        "attributes": {
+                            "input": {
+                                "attributes": {
+                                    "values": [
+                                        {
+                                            "attributes": {
+                                                "attributeName": "Preferred Last Name",
+                                                "sourceName": "Namely"
+                                            },
+                                            "type": "accountAttribute"
+                                        },
+                                        {
+                                            "attributes": {
+                                                "attributeName": "Last Name",
+                                                "sourceName": "Namely"
+                                            },
+                                            "type": "accountAttribute"
+                                        }
+                                    ]
+                                },
+                                "type": "firstValid"
+                            }
+                        },
+                        "input": {
+                            "attributes": {
+                                "regex": "\\W|_",
+                                "replacement": ""
+                            },
+                            "type": "replace"
+                        }
+                    },
+                    "type": "trim"
+                }
+            },
+            "id": "Determine Last Name New",
+            "type": "decomposeDiacriticalMarks"
+        },
+        {
+            "attributes": {
+                "department": {
+                    "attributes": {
+                        "begin": {
+                            "attributes": {
+                                "substring": " "
+                            },
+                            "input": {
+                                "type": "trim"
+                            },
+                            "type": "indexOf"
+                        },
+                        "beginOffset": "1",
+                        "end": {
+                            "attributes": {
+                                "substring": ":"
+                            },
+                            "input": {
+                                "type": "trim"
+                            },
+                            "type": "indexOf"
+                        }
+                    },
+                    "type": "substring"
+                },
+                "value": "$department.trim()"
+            },
+            "id": "Generate Department Name - Workday",
+            "type": "static"
+        }
+    ]
+}
